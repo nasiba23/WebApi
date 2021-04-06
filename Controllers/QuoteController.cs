@@ -2,10 +2,13 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using WebApplication.Db;
 using WebApplication.Models;
 
-namespace WebApplication.Db
+namespace WebApplication.Controllers
 {
+    [ApiController]
+    [Route("api/[controller]/[action]")]
     public class QuoteController
     {
         private DataContext _db;
