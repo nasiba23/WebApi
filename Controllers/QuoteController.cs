@@ -9,7 +9,7 @@ namespace WebApplication.Controllers
 {
     [ApiController]
     [Route("api/[controller]/[action]")]
-    public class QuoteController
+    public class QuoteController : ControllerBase
     {
         private DataContext _db;
 
@@ -30,7 +30,12 @@ namespace WebApplication.Controllers
             Quote quote = await _db.Quotes.FirstOrDefaultAsync(q => q.Id == id);
             if (quote == null)
             {
-                return new NotFoundResult();
+                return NotFound();
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
             }
             return new ObjectResult(quote);
         }
@@ -40,9 +45,13 @@ namespace WebApplication.Controllers
         {
             if (quote == null)
             {
-                return new BadRequestResult();
+                return NotFound();
             }
-            
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
             _db.Quotes.Add(quote);
             await _db.SaveChangesAsync();
             return new OkObjectResult(quote);
@@ -54,9 +63,12 @@ namespace WebApplication.Controllers
             Quote quote = await _db.Quotes.FirstOrDefaultAsync(q => q.Id == id);
             if (quote == null)
             {
-                return new NotFoundResult();
+                return NotFound();
             }
-
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
             _db.Remove(quote);
             await _db.SaveChangesAsync();
             return new OkObjectResult(quote);
