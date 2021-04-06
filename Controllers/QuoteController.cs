@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -32,11 +33,6 @@ namespace WebApplication.Controllers
             {
                 return NotFound();
             }
-
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
             return new ObjectResult(quote);
         }
 
@@ -47,7 +43,6 @@ namespace WebApplication.Controllers
             {
                 return NotFound();
             }
-
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -57,6 +52,23 @@ namespace WebApplication.Controllers
             return new OkObjectResult(quote);
         }
 
+        [HttpPut("{id}")]
+        public async Task<ActionResult<Quote>> Put(Quote quote)
+        {
+            if (quote == null)
+            {
+                return BadRequest();
+            }
+            if (!_db.Quotes.Any(q => q.Id == quote.Id))
+            {
+                return NotFound();
+            }
+
+            _db.Update(quote);
+            await _db.SaveChangesAsync();
+            return Ok(quote);
+        }
+
         [HttpDelete("{id}")]
         public async Task<ActionResult<Quote>> Delete(int id)
         {
@@ -64,10 +76,6 @@ namespace WebApplication.Controllers
             if (quote == null)
             {
                 return NotFound();
-            }
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
             }
             _db.Remove(quote);
             await _db.SaveChangesAsync();
