@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -22,7 +23,13 @@ namespace WebApplication.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Quote>>> Get()
         {
-            return await _db.Quotes.ToListAsync();
+            var quotes = await _db.Quotes.ToListAsync();
+            var quotesForDelete = quotes.Where(q => DateTime.Now - q.InsertDate > new TimeSpan(30, 0, 0));
+            foreach (var x in quotesForDelete)
+            {
+                _db.Quotes.Remove(x);
+            }
+            return quotes;
         }
 
         [HttpGet("{id}")]
