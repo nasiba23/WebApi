@@ -24,11 +24,8 @@ namespace WebApplication.Controllers
         public async Task<ActionResult<IEnumerable<Quote>>> Get()
         {
             var quotes = await _db.Quotes.ToListAsync();
-            var quotesForDelete = quotes.Where(q => DateTime.Now - q.InsertDate > new TimeSpan(30, 0, 0));
-            foreach (var x in quotesForDelete)
-            {
-                _db.Quotes.Remove(x);
-            }
+            _db.RemoveRange(quotes.Where(q => DateTime.Now - q.InsertDate > new TimeSpan(30, 0, 0)));
+            await _db.SaveChangesAsync();
             return quotes;
         }
 

@@ -10,8 +10,8 @@ using WebApplication.Db;
 namespace WebApplication.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20210406064943_FirstMigration")]
-    partial class FirstMigration
+    [Migration("20210406080328_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -47,35 +47,35 @@ namespace WebApplication.Migrations
                         {
                             Id = 1,
                             Author = "Nelson Mandela",
-                            InsertDate = new DateTime(2021, 4, 6, 11, 49, 43, 286, DateTimeKind.Local).AddTicks(3124),
+                            InsertDate = new DateTime(2021, 4, 6, 13, 3, 28, 568, DateTimeKind.Local).AddTicks(5165),
                             Text = "The greatest glory in living lies not in never falling, but in rising every time we fall."
                         },
                         new
                         {
                             Id = 2,
                             Author = "Walt Disney",
-                            InsertDate = new DateTime(2021, 4, 6, 11, 49, 43, 287, DateTimeKind.Local).AddTicks(7345),
+                            InsertDate = new DateTime(2021, 4, 6, 13, 3, 28, 569, DateTimeKind.Local).AddTicks(6992),
                             Text = "The way to get started is to quit talking and begin doing."
                         },
                         new
                         {
                             Id = 3,
                             Author = "Eleanor Roosevelt",
-                            InsertDate = new DateTime(2021, 4, 6, 11, 49, 43, 287, DateTimeKind.Local).AddTicks(7375),
+                            InsertDate = new DateTime(2021, 4, 6, 13, 3, 28, 569, DateTimeKind.Local).AddTicks(7013),
                             Text = "If life were predictable it would cease to be life, and be without flavor."
                         },
                         new
                         {
                             Id = 4,
                             Author = "John Lennon",
-                            InsertDate = new DateTime(2021, 4, 6, 11, 49, 43, 287, DateTimeKind.Local).AddTicks(7377),
+                            InsertDate = new DateTime(2021, 4, 6, 13, 3, 28, 569, DateTimeKind.Local).AddTicks(7015),
                             Text = "Life is what happens when you're busy making other plans."
                         },
                         new
                         {
                             Id = 5,
                             Author = "Franklin D. Roosevelt",
-                            InsertDate = new DateTime(2021, 4, 6, 11, 49, 43, 287, DateTimeKind.Local).AddTicks(7379),
+                            InsertDate = new DateTime(2021, 4, 6, 13, 3, 28, 569, DateTimeKind.Local).AddTicks(7016),
                             Text = "When you reach the end of your rope, tie a knot in it and hang on."
                         });
                 });
